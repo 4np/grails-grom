@@ -19,15 +19,16 @@ import org.codehaus.groovy.grails.plugins.GrailsPluginUtils
  * $Date$
  */
 class GromGrailsPlugin {
-	def version = "0.2.0"
-	def grailsVersion = "1.3.4 > *"
-	def dependsOn = [:]
-	def pluginExcludes = ["grails-app/views/error.gsp"]
-	def author = "Jeroen Wesbeek"
-	def authorEmail = "work@osx.eu"
-	def title = "Grom"
-	def description = '''Grom (Dutch for Growl) sends Grails notifications to Mac OS X and Windows using Growl, or to Linux using libnotify.'''
-	def documentation = "http://grails.org/plugin/grom"
+	def version			= "0.2.1"
+	def grailsVersion	= "1.3.4 > *"
+	def dependsOn		= [:]
+	def pluginExcludes	= ["grails-app/views/error.gsp"]
+	def author			= "Jeroen Wesbeek"
+	def authorEmail		= "work@osx.eu"
+	def title			= "Grom"
+	def description		= '''Grom (Dutch for Growl) sends Grails notifications to Mac OS X and Windows using Growl, or to Linux using libnotify.'''
+	def documentation	= "http://grails.org/plugin/grom"
+	static warningSent		= false
 
 	def doWithWebDescriptor = { xml ->
 		// TODO Implement additions to web.xml (optional), this event occurs before
@@ -78,8 +79,13 @@ class GromGrailsPlugin {
 						Runtime.getRuntime().exec((String[]) cmd.toArray())
 					} catch (Exception e) {
 						// no gromming for now?
-						log.error "Grom: plugin encountered a problem sending growl notifications"
-						log.error "      --> ${e.getMessage()}"
+						if (!warningSent) {
+							warningSent = true
+							log.error "Grom: plugin encountered a problem sending growl notifications"
+							log.error "      --> ${e.getMessage()}"
+						}
+
+						log.debug "Grom: ${message}"
 					}
 				}
 			} else if (System.properties["os.name"] == "Linux") {
@@ -118,11 +124,21 @@ class GromGrailsPlugin {
 					} catch (Exception e) {
 						// check if libnotify is installed
 						if (e.getMessage() =~ "No such file") {
-							log.error "Grom: please install libnotify in order to receive notifications from the Grom plugin"
-							log.error "      see ${documentation} for more information"
+							if (!warningSent) {
+								warningSent = true
+								log.error "Grom: please install libnotify in order to receive notifications from the Grom plugin"
+								log.error "      see ${documentation} for more information"
+							}
+
+							log.debug "Grom: ${message}"
 						} else {
-							log.error "Grom: plugin encounted a problem sending notifications"
-							log.error "      --> ${e.getMessage()}"
+							if (!warningSent) {
+								warningSent = true
+								log.error "Grom: plugin encounted a problem sending notifications"
+								log.error "      --> ${e.getMessage()}"
+							}
+
+							log.debug "Grom: ${message}"
 						}
 					}
 				}
@@ -150,34 +166,52 @@ class GromGrailsPlugin {
 						// handle feedback
 						process.in.eachLine { line -> feedback += line }
 						if (feedback =~ "The destination server was not reachable") {
-							log.error "Grom: please install growl for windows in order to receive notifications from the Grom plugin"
-							log.error "      see ${documentation} for more information"
+							if (!warningSent) {
+								warningSent = true
+								log.error "Grom: please install growl for windows in order to receive notifications from the Grom plugin"
+								log.error "      see ${documentation} for more information"
+							}
+
+							log.debug "Grom: ${message}"
 						} else if (!(feedback =~ "Notification sent successfully")) {
 							throw new Exception(feedback)
 						}
 					} catch (Exception e) {
 						// no gromming for now?
-						log.error "Grom: plugin encountered a problem sending growl notifications"
-						log.error "      --> ${e.getMessage()}"
+						if (!warningSent) {
+							warningSent = true
+							log.error "Grom: plugin encountered a problem sending growl notifications"
+							log.error "      --> ${e.getMessage()}"
+						}
+
+						log.debug "Grom: ${message}"
 					}
 				}
 			} else {
 				// unsupported OS
 				String.metaClass.grom = {
-					log.error "Grom: ${System.properties["os.name"]} is currently not supported"
-					log.error "      see ${documentation} for more information"
+					if (!warningSent) {
+						warningSent = true
+						log.error "Grom: ${System.properties["os.name"]} is currently not supported"
+						log.error "      see ${documentation} for more information"
+					}
+
+					log.debug "Grom: ${message}"
 				}
 			}
 		} catch (Exception e) {
 			// something went terribly wrong... :S
 			// show feedback...
-			log.error "Grom: plugin has encountered a problem setting up the global grom method"
-			log.error "      --> ${e.getMessage()}"
+			if (!warningSent) {
+				warningSent = true
+				log.error "Grom: plugin has encountered a problem setting up the global grom method"
+				log.error "      --> ${e.getMessage()}"
+			}
 
 			// ...and make sure the method is available
 			String.metaClass.grom = {
 				// just print it to the terminal
-				log.debug delegate.toString()
+				log.debug "Grom: ${delegate.toString()}"
 			}
 		}
 	}
