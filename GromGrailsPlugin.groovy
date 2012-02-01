@@ -19,7 +19,7 @@ import org.codehaus.groovy.grails.plugins.GrailsPluginUtils
  * $Date$
  */
 class GromGrailsPlugin {
-	def version			= "0.2.2"
+	def version			= "0.2.3"
 	def grailsVersion	= "1.3.4 > *"
 	def dependsOn		= [:]
 	def pluginExcludes	= ["grails-app/views/error.gsp"]
@@ -162,7 +162,7 @@ class GromGrailsPlugin {
 				"-t",
 				"2000",
 				"-u",
-				"critical",
+				"normal",
 				"-h",
 				"string:x-canonical-append:allowed",
 				"--icon",
