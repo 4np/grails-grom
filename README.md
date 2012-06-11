@@ -7,10 +7,10 @@ So what would be better than to use Growl instead, as it is unobtrusive and the 
 
 ![image](http://grails.org/wikiImage/screenshots-754/Grom_with_Growl_on_Mac_OS_X_-_2.png)
 
-More screenshots are available in the Screenshots tab.
-
 ## Mac OS X
 Most people I know already run [Growl](http://growl.info/) as a notification daemon, so I'm pretty sure I'm not telling you anything new here. In order to have any benefit from this plugin you should install Growl to centralize messages. In case you're not familiar with Growl, [many Mac applications](http://growl.info/applications.php) already support Growl integration so it will be an overall improvement to your Mac experience to have Growl installed. With or without using this plugin.
+
+![image](http://grails.org/wikiImage/screenshots-754/Grom_with_Growl_on_Mac_OS_X.png)
 
 ## Linux / Ubuntu
 The unified messaging implementation in Ubuntu provided through [Notify OSD](https://wiki.ubuntu.com/NotifyOSD). I am not entirely sure if it is also available for other distributions, but as Ubuntu is by far the most common distribution used in corporate organizations and home desktop installations, I chose to support Notify OSD. Notify OSD is by default available in (the latest releases of) Ubuntu, however the client binary is not provided so you need to install that to get Grom working on Ubuntu. To do that, just install libnotify-bin and you're good to go:
@@ -25,6 +25,14 @@ While Grom will now work, there are a number of limitations with the default imp
 * grouping of notifications does not work
 
 Luckily the first two limitations can be solved by using the [Leolik patch](http://www.webupd8.org/2010/05/finally-easy-way-to-customize-notify.html) for Notify OSD. Unfortunately the latter does not seem to be getting picked up [anytime soon](https://bugs.launchpad.net/ubuntu/+source/notify-osd/+bug/434913). Perhaps is more people voted the issue up, as support for grouping is already integrated into this plugin.
+
+![image](http://grails.org/wikiImage/screenshots-754/Grom_with_Notify_OSD_on_Ubuntu.png)
+
+*The default Grails events like 'Server Running' automatically show notifications*
+
+![image](http://grails.org/wikiImage/screenshots-754/Grom_with_Notify_OSD_on_Ubuntu_2.png)
+
+*It's also possible to show custom notifications*
 
 ## Windows
 [Growl for Windows](http://www.growlforwindows.com) basically is a port of Growl for Mac OS X and brings unified messaging to Windows. To have any benefit from this plugin, you should install Growl for Windows and the [Microsoft .NET Framework](http://msdn.microsoft.com/en-us/netframework) (v2.0 or higher)
