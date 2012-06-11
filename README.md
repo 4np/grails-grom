@@ -24,7 +24,7 @@ While Grom will now work, there are a number of limitations with the default imp
 * the notifications cannot be customized
 * grouping of notifications does not work
 
-Luckily the first two limitations can be solved by using the [Leolik patch](http://www.webupd8.org/2010/05/finally-easy-way-to-customize-notify.html) for Notify OSD. Unfortunately the latter does not seem to be getting picked up [anytime soon](https://bugs.launchpad.net/ubuntu/+source/notify-osd/+bug/434913). Perhaps is more people voted the issue up, as support for grouping is already integrated into this plugin.
+Luckily the first two limitations can be solved by using the [Leolik patch](http://www.webupd8.org/2010/05/finally-easy-way-to-customize-notify.html) for Notify OSD. Unfortunately the latter does not seem to be getting picked up [anytime soon](https://bugs.launchpad.net/ubuntu/+source/notify-osd/+bug/434913). Perhaps if more people voted the issue up, as support for grouping is already integrated into this plugin.
 
 ![image](http://grails.org/wikiImage/screenshots-754/Grom_with_Notify_OSD_on_Ubuntu.png)
 
