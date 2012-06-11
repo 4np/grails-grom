@@ -3,7 +3,7 @@ Grom [is Dutch for Growl](http://www.mijnwoordenboek.nl/werkwoord/grommen), whic
 
 Development of this plugin was inspired by [N.A.D.D. Neutralizer](http://www.grails.org/plugin/nadd-neutralizer), a plugin to decrease development latency by using the speech synthesizer to notify you when a project was up and running. While this was very useful at the time and certainly has it's uses (me and my colleagues even gave [feedback](http://phatness.com/2010/04/nadd-neutralizer/) to improve support), it was a bit too obtrusive for our  liking as it started iTunes if not running and at some point you just wished it stopped talking.
 
-So what would be better than to use Growl instead, as it is unobtrusive and the whole reason for running a notification daemon is to unify messaging into a single location. So I developed Grom initially for [Growl|http://growl.info/] on Mac OS X, and I added multi-platform support later by including support for [Growl for Windows](http://www.growlforwindows.com) and [Notify OSD](https://wiki.ubuntu.com/NotifyOSD) for Linux which is by default shipped with Ubuntu.
+So what would be better than to use Growl instead, as it is unobtrusive and the whole reason for running a notification daemon is to unify messaging into a single location. So I developed Grom initially for [Growl](http://growl.info/) on Mac OS X, and I added multi-platform support later by including support for [Growl for Windows](http://www.growlforwindows.com) and [Notify OSD](https://wiki.ubuntu.com/NotifyOSD) for Linux which is by default shipped with Ubuntu.
 
 ![image](http://grails.org/wikiImage/screenshots-754/Grom_with_Growl_on_Mac_OS_X_-_2.png)
 
