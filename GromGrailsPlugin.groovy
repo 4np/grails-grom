@@ -9,7 +9,7 @@ import org.codehaus.groovy.grails.plugins.GrailsPluginUtils
  *
  * A plugin to send notifications to the window manager of the
  * host OS. It currently supports the following:
- * 	- Max OS X via Growl
+ *  - Max OS X via Growl
  *  - Windows via Growl for Windows
  *  - Linux via libnotify
  *
@@ -18,24 +18,62 @@ import org.codehaus.groovy.grails.plugins.GrailsPluginUtils
  * $Author$
  * $Date$
  */
+
 class GromGrailsPlugin {
-	def version			= "0.2.3"
-	def grailsVersion	= "1.3.4 > *"
-	def dependsOn		= [:]
-	def pluginExcludes	= ["grails-app/views/error.gsp"]
-	def author			= "Jeroen Wesbeek"
-	def authorEmail		= "work@osx.eu"
-	def title			= "Grom"
-	def description		= '''Grom (Dutch for Growl) sends Grails notifications to Mac OS X and Windows using Growl, or to Linux using libnotify.'''
-	def documentation	= "http://grails.org/plugin/grom"
+    def version		= "0.2.4"
+    def grailsVersion	= "1.3.4 > *"
+    def dependsOn	= [:]
+    def pluginExcludes  = [
+                "grails-app/views/error.gsp",
+		"grails-app/conf/DataSource.groovy",
+                "web-app/css",
+                "web-app/images",
+                "web-app/js"
+    ]
+    def author		= "Jeroen Wesbeek"
+    def authorEmail	= "work@osx.eu"
+    def title		= "Grom"
+    def description	= '''Grom (Dutch for Growl) sends Grails notifications to Mac OS X and Windows using Growl, or to Linux using libnotify.'''
+    def documentation   = "https://github.com/4np/grails-grom/blob/master/README.md"
+    def license         = "APACHE"
+    def issueManagement = [ system: "github", url: "https://github.com/4np/grails-grom/issues" ]
+    def scm             = [ url: "https://github.com/4np/grails-grom" ]
 
-	def doWithWebDescriptor = { xml ->
-		// TODO Implement additions to web.xml (optional), this event occurs before
-	}
+    // Extra (optional) plugin metadata
 
-	def doWithSpring = {
-		// TODO Implement runtime spring config (optional)
-	}
+    // Details of company behind the plugin (if there is one)
+//    def organization = [ name: "My Company", url: "http://www.my-company.com/" ]
+
+    // Any additional developers beyond the author specified above.
+//    def developers = [ [ name: "Joe Bloggs", email: "joe@bloggs.net" ]]
+
+    def doWithWebDescriptor = { xml ->
+        // TODO Implement additions to web.xml (optional), this event occurs before
+    }
+
+    def doWithSpring = {
+        // TODO Implement runtime spring config (optional)
+    }
+
+    def doWithApplicationContext = { applicationContext ->
+        // TODO Implement post initialization spring config (optional)
+    }
+
+    def onChange = { event ->
+        // TODO Implement code that is executed when any artefact that this plugin is
+        // watching is modified and reloaded. The event contains: event.source,
+        // event.application, event.manager, event.ctx, and event.plugin.
+    }
+
+    def onConfigChange = { event ->
+        // TODO Implement code that is executed when the project configuration changes.
+        // The event is the same as for 'onChange'.
+    }
+
+    def onShutdown = { event ->
+        // TODO Implement code that is executed when the application shuts down (optional)
+    }
+
 
 	def getPluginDirectory = { application ->
 		// at this stage we do not have the pluginPath
@@ -60,6 +98,7 @@ class GromGrailsPlugin {
 		// set up Grom
 		try {
 			setUpGrom(applicationName, pluginBasePath, log)
+
 		} catch (Exception e) {
 			log.error "Grom: encountered a problem setting up the global grom method"
 			log.error "  --> ${e.getMessage()}"
@@ -212,20 +251,5 @@ class GromGrailsPlugin {
 		} else if (!(feedback =~ "Notification sent successfully")) {
 			throw new Exception(feedback)
 		}
-	}
-
-	def doWithApplicationContext = { applicationContext ->
-		// TODO Implement post initialization spring config (optional)
-	}
-
-	def onChange = { event ->
-		// TODO Implement code that is executed when any artefact that this plugin is
-		// watching is modified and reloaded. The event contains: event.source,
-		// event.application, event.manager, event.ctx, and event.plugin.
-	}
-
-	def onConfigChange = { event ->
-		// TODO Implement code that is executed when the project configuration changes.
-		// The event is the same as for 'onChange'.
 	}
 }
