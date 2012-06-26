@@ -7,12 +7,60 @@ So what would be better than to use Growl instead, as it is unobtrusive and the 
 
 ![image](http://grails.org/wikiImage/screenshots-754/Grom_with_Growl_on_Mac_OS_X_-_2.png)
 
-## Mac OS X
+## Installation
+To install the plugin, add a compile time dependency to your application's ```BuildConfig```:
+
+```groovy
+grails.project.dependency.resolution = {
+	...
+	plugins {
+		compile ':grom:0.2.3'
+		...
+	}
+}
+```
+
+## Examples
+Grom will send notifications for default Grails events, but it also possible to send custom notifications by *Grom-ing* a String:
+
+```groovy
+"bootstrapping application".grom()
+```
+
+If you, at some point in the future, decide to remove the from plugin, either before packaging to a production environment or for some other reason, keep in mind that any custom *Grom-ing* will break your application as the grom() method will not be available. This can be resolved by using something like:
+
+```groovy
+class MyController {
+	def myAction {
+		if (String.metaClass.getMetaMethod("grom")) "my action is being called".grom()
+	}
+}
+```
+
+You can also *grom* bootstrap messages:
+
+```groovy
+class BootStrap {
+	def init = { servletContext ->
+		if (String.metaClass.getMetaMethod("grom")) "bootstrapping application".grom()
+		...
+	}
+
+	def destroy = {
+		if (String.metaClass.getMetaMethod("grom")) "stopping application...".grom()
+		...
+	}
+} 
+```
+
+*The Grom plugin can be in a production package, as it will just not do anything if no notification agent is present. It may spit out a warning to the logfile, but that can be ignored.*
+
+## Mac OS X support
 Most people I know already run [Growl](http://growl.info/) as a notification daemon, so I'm pretty sure I'm not telling you anything new here. In order to have any benefit from this plugin you should install Growl to centralize messages. In case you're not familiar with Growl, [many Mac applications](http://growl.info/applications.php) already support Growl integration so it will be an overall improvement to your Mac experience to have Growl installed. With or without using this plugin.
 
 ![image](http://grails.org/wikiImage/screenshots-754/Grom_with_Growl_on_Mac_OS_X.png)
 
-## Linux / Ubuntu
+## Linux / Ubuntu support
 The unified messaging implementation in Ubuntu provided through [Notify OSD](https://wiki.ubuntu.com/NotifyOSD). I am not entirely sure if it is also available for other distributions, but as Ubuntu is by far the most common distribution used in corporate organizations and home desktop installations, I chose to support Notify OSD. Notify OSD is by default available in (the latest releases of) Ubuntu, however the client binary is not provided so you need to install that to get Grom working on Ubuntu. To do that, just install libnotify-bin and you're good to go:
 
 ```
@@ -34,7 +82,7 @@ Luckily the first two limitations can be solved by using the [Leolik patch](http
 
 *It's also possible to show custom notifications*
 
-## Windows
+## Windows support
 [Growl for Windows](http://www.growlforwindows.com) basically is a port of Growl for Mac OS X and brings unified messaging to Windows. To have any benefit from this plugin, you should install Growl for Windows and the [Microsoft .NET Framework](http://msdn.microsoft.com/en-us/netframework) (v2.0 or higher)
 
 *If you do not have any of the following notification daemons installed or if you're using a platform which is not -yet?- supported, the Grom plugin will just not send any notifications. Which means you can keep it in a project repository where multiple people work on the same project, without breaking the project on machines that do not support unified notifications.*
