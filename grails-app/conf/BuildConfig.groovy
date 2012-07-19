@@ -31,10 +31,16 @@ grails.project.dependency.resolution = {
     }
 
     plugins {
-        build(":tomcat:$grailsVersion",
-              ":release:latest.integration",
-	      ":rest-client-builder:latest.integration") {
+        build(
+                ":tomcat:$grailsVersion",
+                ":release:latest.integration",
+                ":rest-client-builder:latest.integration"
+        ) {
             export = false
         }
+
+	    compile(":hibernate:$grailsVersion") {
+		    export = false
+	    }
     }
 }
