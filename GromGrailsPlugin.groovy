@@ -20,12 +20,12 @@ import org.codehaus.groovy.grails.plugins.GrailsPluginUtils
  */
 
 class GromGrailsPlugin {
-    def version		= "0.2.4"
+    def version		= "0.2.5"
     def grailsVersion	= "1.3.4 > *"
     def dependsOn	= [:]
     def pluginExcludes  = [
                 "grails-app/views/error.gsp",
-		"grails-app/conf/DataSource.groovy",
+				"grails-app/conf/DataSource.groovy",
                 "web-app/css",
                 "web-app/images",
                 "web-app/js"
@@ -195,6 +195,10 @@ class GromGrailsPlugin {
 		// notify-bin. Put it in here if this feature will be implemented
 		// in the future. Also see:
 		// https://bugs.launchpad.net/ubuntu/+source/notify-osd/+bug/434913
+		//
+		// ~ ~ ~ Thanks to: ~ ~ ~
+		// - Federico Pedemonte for reporting an issue with notifications
+		//   filling up the 'taskbar' on Gnome3, and for providing the fix :)
 		try {
 			def cmd = [
 				"notify-send",
@@ -204,6 +208,8 @@ class GromGrailsPlugin {
 				"normal",
 				"-h",
 				"string:x-canonical-append:allowed",
+				"-h",
+				"int:transient:1",
 				"--icon",
 				"${pluginBasePath}/web-app/lib/grailslogo.png",
 				"Grails :: ${applicationName}",
