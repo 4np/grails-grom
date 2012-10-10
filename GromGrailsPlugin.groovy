@@ -100,8 +100,10 @@ class GromGrailsPlugin {
 			setUpGrom(applicationName, pluginBasePath, log)
 
 		} catch (Exception e) {
-			log.error "Grom: encountered a problem setting up the global grom method"
-			log.error "  --> ${e.getMessage()}"
+			log.warn "Grom: encountered a problem setting up the global grom method"
+			log.warn "  --> ${e.getMessage()}"
+			log.warn "  this probably means this is a server instance which has no"
+			log.warn "  notification daemon running, so you can ignore this message"
 		}
 	}
 
