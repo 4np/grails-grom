@@ -5,7 +5,7 @@ Development of this plugin was inspired by [N.A.D.D. Neutralizer](http://www.gra
 
 So what would be better than to use Growl instead, as it is unobtrusive and the whole reason for running a notification daemon is to unify messaging into a single location. So I developed Grom initially for [Growl](http://growl.info/) on Mac OS X, and I added multi-platform support later by including support for [Growl for Windows](http://www.growlforwindows.com) and [Notify OSD](https://wiki.ubuntu.com/NotifyOSD) for Linux which is by default shipped with Ubuntu.
 
-![image](http://grails.org/wikiImage/screenshots-754/Grom_with_Growl_on_Mac_OS_X_-_2.png)
+![image](https://dl.dropbox.com/s/uivr3y8ra8v11v3/grom-mac-multiple.jpg?dl=1)
 
 ## Installation
 To install the plugin, add a compile time dependency to your application's ```BuildConfig```:
@@ -58,7 +58,7 @@ class BootStrap {
 ## Mac OS X support
 Most people I know already run [Growl](http://growl.info/) as a notification daemon, so I'm pretty sure I'm not telling you anything new here. In order to have any benefit from this plugin you should install Growl to centralize messages. In case you're not familiar with Growl, [many Mac applications](http://growl.info/applications.php) already support Growl integration so it will be an overall improvement to your Mac experience to have Growl installed. With or without using this plugin.
 
-![image](http://grails.org/wikiImage/screenshots-754/Grom_with_Growl_on_Mac_OS_X.png)
+![image](https://dl.dropbox.com/s/mdingf3s7mpblqx/grom-mac.jpg?dl=1)
 
 ## Linux / Ubuntu support
 The unified messaging implementation in Ubuntu provided through [Notify OSD](https://wiki.ubuntu.com/NotifyOSD). I am not entirely sure if it is also available for other distributions, but as Ubuntu is by far the most common distribution used in corporate organizations and home desktop installations, I chose to support Notify OSD. Notify OSD is by default available in (the latest releases of) Ubuntu, however the client binary is not provided so you need to install that to get Grom working on Ubuntu. To do that, just install libnotify-bin and you're good to go:
@@ -74,11 +74,11 @@ While Grom will now work, there are a number of limitations with the default imp
 
 Luckily the first two limitations can be solved by using the [Leolik patch](http://www.webupd8.org/2010/05/finally-easy-way-to-customize-notify.html) for Notify OSD. Unfortunately the latter does not seem to be getting picked up [anytime soon](https://bugs.launchpad.net/ubuntu/+source/notify-osd/+bug/434913). Perhaps if more people voted the issue up, as support for grouping is already integrated into this plugin.
 
-![image](http://grails.org/wikiImage/screenshots-754/Grom_with_Notify_OSD_on_Ubuntu.png)
+![image](https://dl.dropbox.com/s/4tlgyf7a06dyljq/grom-linux.jpg?dl=1)
 
 *The default Grails events like 'Server Running' automatically show notifications*
 
-![image](http://grails.org/wikiImage/screenshots-754/Grom_with_Notify_OSD_on_Ubuntu_2.png)
+![image](https://dl.dropbox.com/s/uivr3y8ra8v11v3/grom-mac-multiple.jpg?dl=1)
 
 *It's also possible to show custom notifications*
 
