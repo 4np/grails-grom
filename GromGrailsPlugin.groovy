@@ -33,7 +33,7 @@ class GromGrailsPlugin {
     def author		= "Jeroen Wesbeek"
     def authorEmail	= "work@osx.eu"
     def title		= "Grom"
-    def description	= '''Grom (Dutch for Growl) sends Grails notifications to Mac OS X and Windows using Growl, or to Linux using libnotify.'''
+    def description	= "Grom (Dutch for Growl) sends Grails notifications to Mac OS X and Windows using Growl, or to Linux using libnotify."
     def documentation   = "https://github.com/4np/grails-grom/blob/master/README.md"
     def license         = "APACHE"
     def issueManagement = [ system: "github", url: "https://github.com/4np/grails-grom/issues" ]
