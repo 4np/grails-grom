@@ -20,7 +20,7 @@ import org.codehaus.groovy.grails.plugins.GrailsPluginUtils
  */
 
 class GromGrailsPlugin {
-    def version		= "0.2.5"
+    def version		= "0.3.0"
     def grailsVersion	= "1.3.4 > *"
     def dependsOn	= [:]
     def pluginExcludes  = [
@@ -79,10 +79,11 @@ class GromGrailsPlugin {
 		// at this stage we do not have the pluginPath
 		// available so we need to instantiate / define
 		// them ourselves
-
 		if (org.codehaus.groovy.grails.plugins.GrailsPluginUtils.pluginDirectories) {
 			// application is being run locally (grails run-app)
-			return org.codehaus.groovy.grails.plugins.GrailsPluginUtils.pluginDirectories.find { it.toString() =~ 'grom' }.file.toString()
+			return org.codehaus.groovy.grails.plugins.GrailsPluginUtils.pluginDirectories.find {
+                (it.respondsTo('getFilename') ? it.getFilename() : it.toString()) =~ 'grom'
+            }.getFile().getAbsolutePath()
 		} else {
 			// we are packaged in a war on an application server
 			// this works on tomcat, however, this will probably
