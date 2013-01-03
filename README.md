@@ -14,7 +14,7 @@ To install the plugin, add a compile time dependency to your application's ```Bu
 grails.project.dependency.resolution = {
 	...
 	plugins {
-		compile ':grom:0.2.3'
+		compile ':grom:latest.integration'
 		...
 	}
 }
