@@ -20,6 +20,42 @@ grails.project.dependency.resolution = {
 }
 ```
 
+or if you only want to use it during development:
+
+```groovy
+grails.project.dependency.resolution = {
+	...
+	plugins {
+		// development only plugins
+		provided(
+                	":grom:latest.integration"
+		)
+                
+		// the rest of your dependencies
+		...
+	}
+}
+```
+
+or add it to a certain environment, like the _ci_ environment:
+
+```groovy
+grails.project.dependency.resolution = {
+	...
+	plugins {
+		...
+		
+		// continuous integration specific plugins
+		if (System.getProperty("grails.env") == "ci") {
+			compile ":grom:latest.integration"
+		}
+	}
+}
+```
+
+_note that a *ci* environment does not exist by default, but you can easily accomplish that by using the following
+property ```grails.env=ci```, for example when building the project in [Jenkins CI](http://jenkins-ci.org)_
+
 ## Examples
 Grom will send notifications for default Grails events, but it also possible to send custom notifications by *Grom-ing* a String:
 
